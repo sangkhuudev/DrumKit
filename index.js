@@ -1,16 +1,20 @@
 
+
+// dectecting mouse clicked 
 let numButton =  document.querySelectorAll(".drum").length;
 for ( let i = 0; i <  numButton ; ++i) {
     document.querySelectorAll(".drum")[i].addEventListener("click" , function () {
         let soundLetter = this.innerHTML ;
-        makeSounds(soundLetter)
-    })
-
-    document.querySelectorAll(".drum")[i].addEventListener("keydown" , function (event) {
-        makeSounds(event.key)
-    })
-    
+        makeSounds(soundLetter);
+        buttonAnimation(soundLetter)
+    })   
 }
+// Detecting key pressed
+document.addEventListener("keydown" , function (event) {
+    makeSounds(event.key);
+    buttonAnimation(event.key)
+
+});
 function makeSounds(key) {
     switch (key) {
         case 'w':
@@ -44,6 +48,13 @@ function makeSounds(key) {
         default: 
             console.log(key) ;     
     }       
+}
+function buttonAnimation ( currentKey ) {
+    let activeKey = document.querySelector('.'+currentKey);
+    activeKey.classList.add('pressed')
+    setTimeout(()=>{
+        activeKey.classList.remove('pressed');
+    },100)
 }
 
 
